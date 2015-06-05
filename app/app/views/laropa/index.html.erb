@@ -1,0 +1,45 @@
+<iron-pages id='pages' selected="1">
+	<div id='page_first' style='text-align:center'>
+		<iron-image id='iron_image_home' src='assets/home_laropa.png' sizing="contain"></iron-image>
+		<paper-button  id='first_search' raised style='color: #444;background-color: white;font-family: Roboto;font-weight: 100;' >
+			<iron-icon icon='search'></iron-icon>Pesquisar
+		</paper-button>
+	</div>
+	<div id='page_secound' style='text-align:center;background-color: white;'>
+		<div nav>
+			
+			<div flex>
+				<iron-icon icon='search'></iron-icon>
+			</div>
+			<div flex>
+				<paper-input-container>
+				  <label>Your name</label>
+				  <input is="iron-input">
+				</paper-input-container> 
+			</div>
+		</div>
+	</div>
+	<div>Three</div>
+</iron-pages>
+<style>
+	[nav] {
+		@apply(--layout-flex);
+		@apply(--layout-vertical);
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		document.querySelector('iron-image').style.width = $(document).width()+"px";
+		document.querySelector('iron-image').style.height  = ($(document).height()-124)+"px";
+		document.querySelector('#page_secound').style.width = $(document).width()+"px";
+		document.querySelector('#page_secound').style.height  = ($(document).height()-64)+"px";
+		$("#first_search").click(function(){
+			changePageTo(1)
+		})
+		console.log('done')
+	})
+	function changePageTo(position){
+		$('#pages')[0].selected = position;
+		console.log('change to',position);
+	}
+</script>

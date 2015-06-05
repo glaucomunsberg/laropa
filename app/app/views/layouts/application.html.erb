@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Laropa</title>
+	<link rel="shortcut icon" href='/assets/favicon.ico'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<%=html_import_tag "application"%>
+	<%=javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%=stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%=csrf_meta_tags %>
+</head>
+<body class="fullbleed layout vertical">
+	<paper-header-panel mode="seamed" headermargin="128" class='system_color_background' main >
+	  <paper-toolbar id="outside_core_toolbar" class='system_color_background'>
+		<paper-icon-button id="navicon" icon="menu" onclick="document.querySelector('paper-drawer-panel').openDrawer()" on-tap="{{togglePanel}}"></paper-icon-button> 
+		<div id="controllers" flex></div>
+		</paper-toolbar>
+		<div vertical layout>
+			<%= yield %>
+		</div>
+	</paper-header-panel>
+</body>
+</html>

@@ -1,0 +1,50 @@
+.system_color_background{
+	background-color: #00ad99;
+}
+.system_color{
+	color: #00ad99
+}
+.system_color_background_disabled{
+	background-color: #87ceac;
+}
+.system_color_disabled{
+	color: #87ceac
+}
+.system_danger_color{
+    color:#f04b57
+}
+.system_danger_color_background{
+    color:#f04b57
+}
+paper-input-decorator[focused] /deep/ .floated-label .label-text {
+  color: #00ad99;
+}
+
+paper-input-decorator /deep/ .focused-underline {
+	background-color: #00ad99;
+}
+
+paper-checkbox::shadow #ink[checked] {
+	color: #00ad99;
+}
+
+paper-checkbox::shadow #checkbox.checked {
+	background-color: #00ad99;
+	border-color: #00ad99;
+}
+
+paper-radio-button::shadow #onRadio {
+  background-color: #00ad99;
+}
+
+paper-radio-button[checked]::shadow #offRadio {
+  border-color: #00ad99;
+}
+paper-tabs::shadow #selectionBar {
+	background-color: white;
+}
+
+paper-tabs paper-tab::shadow #ink {
+	color: white;
+}
+
