@@ -1,30 +1,178 @@
-<iron-pages id='pages' selected="1">
+<iron-pages id='pages' selected="0">
 	<div id='page_first' style='text-align:center'>
 		<iron-image id='iron_image_home' src='assets/home_laropa.png' sizing="contain"></iron-image>
-		<paper-button  id='first_search' raised style='color: #444;background-color: white;font-family: Roboto;font-weight: 100;' >
-			<iron-icon icon='search'></iron-icon>Pesquisar
+		<paper-button  id='first_search' raised >
+			<iron-icon icon='search'></iron-icon>Fazer uma Consulta
 		</paper-button>
 	</div>
-	<div id='page_secound' style='text-align:center;background-color: white;'>
-		<div nav>
-			
-			<div flex>
-				<iron-icon icon='search'></iron-icon>
+	<div id='page_secound' style='padding-top:40px;background-color: white;'>
+		<div class='horizontal layout center'>
+			<div class='flex-1'>
+				 <iron-image src='/assets/avatar_logo.png' sizing="contain" width='64' height='64' style='margin-left:10px'></iron-image>
 			</div>
-			<div flex>
-				<paper-input-container>
-				  <label>Your name</label>
-				  <input is="iron-input">
-				</paper-input-container> 
+			<div class='flex-11' style='margin-left: -20px;'>
+				<h1>Consulta SPARQL</h1>
+			</div>
+		</div>
+		<div class='start horizontal layout' >
+			<div class='flex-1'>
+				
+			</div>
+			<div  class='flex-6' style="height:240px">
+				<paper-material elevation="1">
+					<div class='vertical layout'>
+						<h4>Consulta</h4>
+						<iron-autogrow-textarea id="spartsql_text" rows='4' style='width:100%'  >
+							<textarea >Some</textarea>
+						</iron-autogrow-textarea>
+						<div class='start horizontal layout' style='font-size: 14px;margin-top: 0px;'>
+							<div class='flex-4'>
+								<paper-button onClick="document.querySelector('#spartsql_text').textarea.textContent = 'consulta 1'" noink>Todos os Docentes</paper-button>
+							</div>
+							<div class='flex-4'>
+								<paper-button onClick="document.querySelector('#spartsql_text').textarea.textContent = 'consulta 2'" noink>Pesquisas</paper-button>
+							</div>
+							<div class='flex-4'>
+								<paper-button onClick="document.querySelector('#spartsql_text').textarea.textContent = 'consulta 3'" noink>Artigo Linhas de Pesquisa </paper-button>
+							</div>
+						</div>
+					</div>
+				</paper-material>
+			</div>
+			<div class='flex-3' style="height:240px" >
+				<paper-material elevation="1" >
+					<h4>Formato</h4>
+					<paper-menu>
+						<paper-item>Visital</paper-item>
+						<paper-item>RDF</paper-item>
+						<paper-item>JSON</paper-item>
+					</paper-menu>
+				</paper-material>
+				<div class="layout horizontal around-justified">
+					<div >
+						<paper-button onClick="document.querySelector('#spartsql_text').textarea.textContent = ''" raised>
+							<iron-icon icon='delete'></iron-icon>Limpar 
+						</paper-button>
+					</div>
+					<div >
+						<paper-button id="run" raised>
+							<iron-icon icon='search'></iron-icon>Executar 
+						</paper-button>
+					</div>
+				</div>
+			</div>
+			<div class='flex-1'></div>
+		</div>
+		
+		<div class='horizontal layout'>
+			<div class='flex-10'>
+			</div>
+			<div class='flex-1'>
+				
+			</div>
+			<div class='flex-1'>
+			</div>
+
+		</div>
+	</div>
+	<div style="background-color:white" id='page_three'>
+		<div class='horizontal layout center' style='padding-top:40px;'>
+			<div class='flex-1'>
+				 <iron-image src='/assets/bookshelf.png' sizing="contain" width='64' height='64' style='margin-left:10px'></iron-image>
+			</div>
+			<div class='flex-11' style='margin-left: -20px;'>
+				<h1>Resultados</h1>
 			</div>
 		</div>
 	</div>
-	<div>Three</div>
+	<div style="background-color:white" id='page_four'>
+		<div class='horizontal layout center' style='padding-top:40px;'>
+			<div class='flex-1'>
+				 <iron-image src='/assets/blimp.png' sizing="contain" width='64' height='64' style='margin-left:10px'></iron-image>
+			</div>
+			<div class='flex-11' style='margin-left: -20px;'>
+				<h1>Ajuda</h1>
+			</div>
+		</div>
+		<div class='horizontal layout center'>
+			<div class='flex-1'>
+			</div>
+			<div class='flex-10'>
+				<paper-material elevation="1" >
+					<h2>1. Alguma coisa</h2>
+					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque. Etiam quam nisi, molestie ac dolor in, tincidunt tincidunt arcu. Praesent sed justo finibus, fringilla velit quis, porta erat. Donec blandit metus ut arcu iaculis iaculis. Cras nec dolor fringilla justo ullamcorper auctor. Aliquam eget pretium velit. Morbi urna justo, pulvinar id lobortis in, aliquet placerat orci.</p>
+					<h2>2. Alguma coisa</h2>
+					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque. Etiam quam nisi, molestie ac dolor in, tincidunt tincidunt arcu. Praesent sed justo finibus, fringilla velit quis, porta erat. Donec blandit metus ut arcu iaculis iaculis. Cras nec dolor fringilla justo ullamcorper auctor. Aliquam eget pretium velit. Morbi urna justo, pulvinar id lobortis in, aliquet placerat orci.</p>
+					<h2>2. Alguma coisa</h2>
+					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque. Etiam quam nisi, molestie ac dolor in, tincidunt tincidunt arcu. Praesent sed justo finibus, fringilla velit quis, porta erat. Donec blandit metus ut arcu iaculis iaculis. Cras nec dolor fringilla justo ullamcorper auctor. Aliquam eget pretium velit. Morbi urna justo, pulvinar id lobortis in, aliquet placerat orci.</p>
+				</paper-material>
+			</div>
+			<div class='flex-1'>
+			</div>
+		</div>
+		<div class='horizontal layout center' style='padding-top:40px;' >
+			<div class='flex-1'>
+				 <iron-image src='/assets/dev.png' sizing="contain" width='64' height='64' style='margin-left:10px'></iron-image>
+			</div>
+			<div class='flex-11' style='margin-left: -20px;'>
+				<h1>Desenvolvimento</h1>
+			</div>
+		</div>
+		<div class='horizontal layout'>
+			<div class='flex-1'>
+			</div>
+			<div class='flex-10'>
+				<paper-material elevation="1" >
+					<h1> Equipe</h1>
+					<div class='horizontal layout' style='text-align:center'>
+						<div class='flex-4'>
+							<iron-image src='/assets/andre_peil.jpg' sizing="cover" width='128' height='128' style='margin-left:10px;border-radius: 100%;'></iron-image>
+						</div>
+						<div class='flex-4'>
+							<iron-image src='/assets/daniel_retzlaff.jpg' sizing="cover" width='128' height='128' style='margin-left:10px;border-radius: 100%;'></iron-image>
+						</div>
+						<div class='flex-4'>
+							<iron-image src='/assets/glauco_munsberg.jpg' sizing="cover" width='128' height='128' style='margin-left:10px;border-radius: 100%;'></iron-image>
+						</div>
+					</div>
+					<div class='horizontal layout' style='text-align:center'>
+						<div class='flex-4'>
+							André Peil
+						</div>
+						<div class='flex-4'>
+							Daniel Retzlaff
+						</div>
+						<div class='flex-4'>
+							Glauco Munsberg
+						</div>
+					</div>
+					<div class='vertical layout'>
+						<h3 style='margin-top:40px'>Versão</h3>
+						<div style="margin-left:20px">
+							Label : <%= %x{ git log -1 --pretty=%B } %>
+						</div>
+						<div style="margin-left:20px">
+							Número: <%= %x{ git rev-parse HEAD } %>
+						</div>
+						<div>
+							<paper-button noink id='download_github' >Código Fonte <b>GitHub</b></paper-button>
+						</div>
+					</div>
+				</paper-material>
+			</div>
+			<div class='flex-1'>
+			</div>
+		</div>
+	</div>
 </iron-pages>
 <style>
-	[nav] {
-		@apply(--layout-flex);
-		@apply(--layout-vertical);
+	#first_search{
+		font-family: Roboto;
+		font-weight: 100;
+		color: #444;
+	}
+	#first_search paper-material{
+		background-color:white
 	}
 </style>
 <script>
@@ -33,9 +181,33 @@
 		document.querySelector('iron-image').style.height  = ($(document).height()-124)+"px";
 		document.querySelector('#page_secound').style.width = $(document).width()+"px";
 		document.querySelector('#page_secound').style.height  = ($(document).height()-64)+"px";
+		document.querySelector('#page_three').style.width = $(document).width()+"px";
+		document.querySelector('#page_three').style.height  = ($(document).height()-64)+"px";
+		document.querySelector('#page_four').style.width = $(document).width()+"px";
+		document.querySelector('#page_four').style.min_height  = ($(document).height()-64)+"px";
 		$("#first_search").click(function(){
 			changePageTo(1)
-		})
+		});
+		$("#run").click(function(){
+			if(document.querySelector('paper-menu').selected == undefined){
+				alert('escolha algum formato')
+			}else{
+				if(document.querySelector('paper-menu').selected == 0){
+					$('#pages')[0].selected = 2;
+				}else{
+					alert('Download')
+				}
+			}
+		});
+		$("#help").click(function(){
+			$('#pages')[0].selected = 3;
+		});
+		$("#navicon").click(function(){
+			$('#pages')[0].selected = 0;
+		});
+		$('#download_github').click(function(){
+			window.open("http://github.com/glaucomunsberg/laropa", "_blank");
+		});
 		console.log('done')
 	})
 	function changePageTo(position){

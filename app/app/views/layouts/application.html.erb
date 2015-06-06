@@ -12,10 +12,13 @@
 	<%=csrf_meta_tags %>
 </head>
 <body class="fullbleed layout vertical">
-	<paper-header-panel mode="seamed" headermargin="128" class='system_color_background' main >
-	  <paper-toolbar id="outside_core_toolbar" class='system_color_background'>
-		<paper-icon-button id="navicon" icon="menu" onclick="document.querySelector('paper-drawer-panel').openDrawer()" on-tap="{{togglePanel}}"></paper-icon-button> 
-		<div id="controllers" flex></div>
+	<paper-header-panel mode="standard" headermargin="128" class='system_color_background' main >
+		<paper-toolbar id="outside_core_toolbar" class='system_color_background' style='background: #00ad99;'>
+			<paper-icon-button id="navicon" icon="menu"></paper-icon-button> 
+			<span title style='font-family:Roboto; font-weight:100'>
+				Laropa
+			</span>
+			<paper-icon-button id='help' icon='help' style='position: absolute; right: 0; margin-top: 10px;'></paper-icon-button>
 		</paper-toolbar>
 		<div vertical layout>
 			<%= yield %>
