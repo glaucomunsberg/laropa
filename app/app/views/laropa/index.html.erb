@@ -1,5 +1,5 @@
 <iron-pages id='pages' selected="0">
-	<div id='page_first' style='text-align:center'>
+	<div id='page_first' style='text-align:center' class='system_color_background'>
 		<iron-image id='iron_image_home' src='assets/home_laropa.png' sizing="contain"></iron-image>
 		<paper-button  id='first_search' raised  style='position: absolute;margin-top: -70px;'>
 			<iron-icon icon='search'></iron-icon>Faça uma Consulta
@@ -15,55 +15,49 @@
 			</div>
 		</div>
 		<div class='start horizontal layout' >
-			<div class='flex-1'>
-
-			</div>
-			<div  class='flex-6' style="height:240px">
-				<paper-material elevation="1">
+			<div class='flex-1'></div>
+			<div  class='flex-7'>
+				<paper-material elevation="1" style='min-height: 213px;'>
 					<div class='vertical layout'>
-						<h4>Consulta</h4>
-						<iron-autogrow-textarea id="sparql_text" rows='4' style='width:100%'  >
+						<h4>Crie sua Consulta</h4>
+						<iron-autogrow-textarea id="sparql_text" rows='6' style='width:100%'  >
 							<textarea>Some</textarea>
 						</iron-autogrow-textarea>
-						<div class='start horizontal layout' style='font-size: 14px;margin-top: 0px;'>
-							<div class='flex-4'>
-								<paper-button onClick="select(1)" noink>Todos os Docentes</paper-button>
+						<div class='justified  horizontal layout' style='margin-top:15px'>
+							<div>
+								<paper-fab style='background-color: #00ad99;position: absolute;margin-top: 0px;' icon='delete' onClick="document.querySelector('#sparql_text').textarea.value = ''">
+								</paper-fab>
 							</div>
-							<div class='flex-4'>
-								<paper-button onClick="select(2)" noink>Artigos</paper-button>
-							</div>
-							<div class='flex-4'>
-								<paper-button onClick="select(3)" noink>Co-Autores</paper-button>
+							<div>
+								<paper-fab id="run" style='background-color: #00ad99;position: absolute;margin-top: 0px;right: 20px;' icon='search' raised>
+								</paper-fab>
 							</div>
 						</div>
 					</div>
 				</paper-material>
 			</div>
-			<div class='flex-3' style="height:240px" >
-				<paper-material elevation="1" >
-					<h4>Formato</h4>
-					<paper-menu>
-						<paper-item>Visital</paper-item>
-						<paper-item>RDF</paper-item>
-						<paper-item>JSON</paper-item>
-					</paper-menu>
+			<div class='flex-3'>
+				<paper-material elevation="1">
+					<div class='start vertical layout' style='font-size: 14px;margin-top: 0px;'>
+						<div class='auto-vertical'>
+							<h4>Consultas Prontas</h4>
+						</div>
+						<div class='auto-vertical'>
+							<paper-button onClick="select(1)" noink><iron-icon icon='class'></iron-icon> Todos os Docentes</paper-button>
+						</div>
+						<div class='auto-vertical'>
+							<paper-button onClick="select(2)" noink><iron-icon icon='class'></iron-icon> Artigos</paper-button>
+						</div>
+						<div class='auto-vertical'>
+							<paper-button onClick="select(3)" noink><iron-icon icon='class'></iron-icon> Co-Autores</paper-button>
+						</div>
+					</div>
+					
 				</paper-material>
-				<div class="layout horizontal around-justified">
-					<div >
-						<paper-button onClick="document.querySelector('#sparql_text').textarea.textContent = ''" raised>
-							<iron-icon icon='delete'></iron-icon>Limpar
-						</paper-button>
-					</div>
-					<div >
-						<paper-button id="run" raised>
-							<iron-icon icon='search'></iron-icon>Executar
-						</paper-button>
-					</div>
-				</div>
+				
 			</div>
 			<div class='flex-1'></div>
 		</div>
-
 		<div class='horizontal layout'>
 			<div id='a' class='flex-10'>
 			</div>
@@ -101,12 +95,13 @@
 			</div>
 			<div class='flex-10'>
 				<paper-material elevation="1" >
-					<h2>1. Alguma coisa</h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque. Etiam quam nisi, molestie ac dolor in, tincidunt tincidunt arcu. Praesent sed justo finibus, fringilla velit quis, porta erat. Donec blandit metus ut arcu iaculis iaculis. Cras nec dolor fringilla justo ullamcorper auctor. Aliquam eget pretium velit. Morbi urna justo, pulvinar id lobortis in, aliquet placerat orci.</p>
-					<h2>2. Alguma coisa</h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque. Etiam quam nisi, molestie ac dolor in, tincidunt tincidunt arcu. Praesent sed justo finibus, fringilla velit quis, porta erat. Donec blandit metus ut arcu iaculis iaculis. Cras nec dolor fringilla justo ullamcorper auctor. Aliquam eget pretium velit. Morbi urna justo, pulvinar id lobortis in, aliquet placerat orci.</p>
-					<h2>2. Alguma coisa</h2>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque. Etiam quam nisi, molestie ac dolor in, tincidunt tincidunt arcu. Praesent sed justo finibus, fringilla velit quis, porta erat. Donec blandit metus ut arcu iaculis iaculis. Cras nec dolor fringilla justo ullamcorper auctor. Aliquam eget pretium velit. Morbi urna justo, pulvinar id lobortis in, aliquet placerat orci.</p>
+					<h2>1. Web Semanântica</h2>
+					<p> A conhecida “Web de documentos” é a “Web dos dados”, viabilizando pesquisas como num banco de dados. O objetivo final da Web de dados é possibilitar com que computadores façam coisas mais úteis e com que o desenvolvimento de sistemas possa oferecer suporte a interações na rede. O termo “Web Semântica” refere-se à visão do W3C da Web dos Dados Linkados. A Web Semântica dá às pessoas a capacidade de criarem repositórios de dados na Web, construírem vocabulários e escreverem regras para interoperarem com esses dados. A linkagem de dados é possível com tecnologias como RDF, SPARQL, OWL, SKOS.</p>
+					<h2>2. Lattes Semânticos</h2>
+					<p> Lattes semântico é a abordagem da transformação dos lattes XML em dados estruturados e com sentido semântico permitido pela conversão usando a <a href='https://wiki.duraspace.org/display/VIVO/VIVO-ISF+Ontology'>Ontologia VIVO</a>. Para essa transformação foi utilizado o conversor de XML para RDF <a href='https://github.com/arademaker/SLattes'>Slattes</a> proposto do A. Rademaker. Atualmente a base de dados que está sendo realizado essas consultas está no <a href='https://github.com/openlink/virtuoso-opensource'>Virtuoso-OpenSource</a></p> 
+					<h2>3. SPARQL</h2>
+					<p> Significa SPARQL Protocol And RDF Query Language, o seu propósito é permitir que arquivos RDF sejam
+consultados através de uma linguagem SQL Like. É uma linguagem orientada a dados, ou seja, recupera dados armazenados em arquivos RDF. É construída sobre o formato de triplas sujeito, predicado e objeto. <a href='http://www.w3.org/TR/rdf-sparql-query/'>Mas sobre</a></p>
 				</paper-material>
 			</div>
 			<div class='flex-1'>
@@ -181,6 +176,8 @@
 	$(document).ready(function(){
 		document.querySelector('iron-image').style.width = $(document).width()+"px";
 		document.querySelector('iron-image').style.height  = ($(document).height()-124)+"px";
+		document.querySelector('#page_first').style.width = $(document).width()+"px";
+		document.querySelector('#page_first').style.height  = ($(document).height()-64)+"px";
 		document.querySelector('#page_secound').style.width = $(document).width()+"px";
 		document.querySelector('#page_secound').style.height  = ($(document).height()-64)+"px";
 		document.querySelector('#page_three').style.width = $(document).width()+"px";
@@ -194,48 +191,34 @@
 			changePageTo(1)
 		});
 		$("#run").click(function(){
-			if(document.querySelector('paper-menu').selected == undefined){
-				alert('escolha algum formato')
-			}else{
-				if(document.querySelector('paper-menu').selected == 0){
-					$('#pages')[0].selected = 2;
-				}else{
-					console.log("else");
+			$.ajax({
+           		url : "/laropa/loadQuery",
+				data:{"query": $("#textarea").val()},
+				success : function(data){
+					var a = "<div> <table id=\"table_main\"> <tr>"
+								for (var i = 0; i < data["cont"]; i++){
+						a += "<th>collumn" + i +"</th>"
+					}
+					a+= "</tr>"
+					console.log("comecando o content");
+					var array = []
+					array = data["content"];
+					console.log(array);
+					console.log(array.length);
+					for (var i = 0; i < data["content"].length; i++){
+						a+= "<tr>";
+						for (var j = 0; j < data["cont"]; j++){
+							a += "<td>"+ data["content"][i][j] +"</td>";
+						}
+						a += "</tr>"
+					}
+					a += "</table></div>"
+					$("#result").html(a);
+				},
+				error: function(xhr, ajaxOptions, thrownError){
+					console.log(xhr);
 				}
-
-				$.ajax({
-           				 	url : "/laropa/loadQuery",
-					data:{"query": $("#textarea").val()},
-                					success : function(data){
-
-						var a = "<div> <table id=\"table_main\"> <tr>"
-                					for (var i = 0; i < data["cont"]; i++){
-							a += "<th>collumn" + i +"</th>"
-						}
-						a+= "</tr>"
-
-						console.log("comecando o content");
-						var array = []
-						array = data["content"];
-						console.log(array);
-						console.log(array.length);
-						for (var i = 0; i < data["content"].length; i++){
-							a+= "<tr>";
-							for (var j = 0; j < data["cont"]; j++){
-								a += "<td>"+ data["content"][i][j] +"</td>";
-							}
-							a += "</tr>"
-
-						}
-						a += "</table></div>"
-						$("#result").html(a);
-
-                					},
-                					error: function(xhr, ajaxOptions, thrownError){
-                    						console.log(xhr);
-                					}
-				});
-			}
+			});
 		});
 		$("#help").click(function(){
 			$('#pages')[0].selected = 3;
@@ -252,15 +235,15 @@
 	function select(select){
  		var str;
 		if (select == "1" ){
-                               str = "SELECT DISTINCT ?id ?nome FROM <http://laropa.com> WHERE { ?person bibo:identifier ?id . ?person dc:title ?nameCV . ?person dc:creator ?personCreator. ?personCreator rdfs:label ?nome. ?nodeAuthor vivo:relates ?nodeAuthor2 . FILTER (?person != <http://ufpel.edu.br/lattes/2054259785006041>). }";
+                               str = "SELECT DISTINCT ?id ?nome \nFROM <http://laropa.com> \nWHERE { \n?person bibo:identifier ?id . ?person dc:title ?nameCV .\n ?person dc:creator ?personCreator.\n ?personCreator rdfs:label ?nome.\n ?nodeAuthor vivo:relates ?nodeAuthor2 .\n FILTER (?person != <http://ufpel.edu.br/lattes/2054259785006041>). }";
 		}
 		if(select =="2"){
-			str = "SELECT DISTINCT ?nameAuthor ?nameArticle ?coAuthorName  ?nameConference ?year ?refBy FROM <http://laropa.com> WHERE{ ?article a bibo:AcademicArticle . ?article dc:title ?nameArticle . ?article dcterms:isReferencedBy ?refBy . ?article vivo:relatedBy ?nodeAuthor. ?article dcterms:issued ?year . ?nodeAuthor vivo:relates ?nodeAuthor2. ?nodeAuthor vivo:rank ?rank . ?nodeAuthor2 rdfs:label ?coAuthorName . ?refBy dc:creator ?personCreator. ?personCreator rdfs:label ?nameAuthor. ?article bibo:presentedAt ?conference. ?conference dc:title ?nameConference . ?refBy bibo:identifier ?id. FILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>). FILTER (!regex(str(?nodeAuthor2), concat(\"#author-\",str(?id)))) } ORDER BY ?nameAuthor";
+			str = "SELECT DISTINCT ?nameAuthor ?nameArticle ?coAuthorName  ?nameConference ?year ?refBy \nFROM <http://laropa.com> \nWHERE{ ?article a bibo:AcademicArticle .\n ?article dc:title ?nameArticle .\n ?article dcterms:isReferencedBy ?refBy .\n ?article vivo:relatedBy ?nodeAuthor. ?article dcterms:issued ?year . ?nodeAuthor vivo:relates ?nodeAuthor2. ?nodeAuthor vivo:rank ?rank .\n ?nodeAuthor2 rdfs:label ?coAuthorName .\n ?refBy dc:creator ?personCreator.\n ?personCreator rdfs:label ?nameAuthor.\n ?article bibo:presentedAt ?conference.\n ?conference dc:title ?nameConference .\n ?refBy bibo:identifier ?id.\n FILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>).\n FILTER (!regex(str(?nodeAuthor2), concat(\"#author-\",str(?id)))) } \nORDER BY ?nameAuthor";
 		}
 		if(select == "3"){
-			str = "SELECT ?refBy ?name count(*) FROM <http://laropa.com> WHERE{ ?article a bibo:AcademicArticle . ?article dc:title ?nameArticle . ?article dcterms:isReferencedBy ?refBy . ?article dcterms:issued ?year. ?refBy dc:creator ?personCreator . ?personCreator rdfs:label ?name FILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>).} ORDER BY ?name ";
+			str = "SELECT ?refBy ?name count(*) \nFROM <http://laropa.com> \nWHERE{ ?article a bibo:AcademicArticle .\n ?article dc:title ?nameArticle .\n ?article dcterms:isReferencedBy ?refBy .\n ?article dcterms:issued ?year.\n ?refBy dc:creator ?personCreator .\n ?personCreator rdfs:label ?name \nFILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>).} \nORDER BY ?name ";
 		}
-		document.querySelector('#sparql_text').textarea.textContent = str;
+		document.querySelector('#sparql_text').textarea.value = str;
 
 	}
 	function changePageTo(position){
