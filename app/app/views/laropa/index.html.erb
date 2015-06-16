@@ -23,17 +23,17 @@
 					<div class='vertical layout'>
 						<h4>Consulta</h4>
 						<iron-autogrow-textarea id="sparql_text" rows='4' style='width:100%'  >
-							<textarea >Some</textarea>
+							<textarea>Some</textarea>
 						</iron-autogrow-textarea>
 						<div class='start horizontal layout' style='font-size: 14px;margin-top: 0px;'>
 							<div class='flex-4'>
-								<paper-button onClick="document.querySelector('#sparql_text').textarea.textContent = 'consulta 1'" noink>Todos os Docentes</paper-button>
+								<paper-button onClick="select(1)" noink>Todos os Docentes</paper-button>
 							</div>
 							<div class='flex-4'>
-								<paper-button onClick="document.querySelector('#sparql_text').textarea.textContent = 'consulta 2'" noink>Pesquisas</paper-button>
+								<paper-button onClick="select(2)" noink>Artigos</paper-button>
 							</div>
 							<div class='flex-4'>
-								<paper-button onClick="document.querySelector('#sparql_text').textarea.textContent = 'consulta 3'" noink>Artigo Linhas de Pesquisa </paper-button>
+								<paper-button onClick="select(3)" noink>Co-Autores</paper-button>
 							</div>
 						</div>
 					</div>
@@ -65,8 +65,7 @@
 		</div>
 
 		<div class='horizontal layout'>
-			<div class='flex-10'>
-			<%= @result %>
+			<div id='a' class='flex-10'>
 			</div>
 			<div class='flex-1'>
 			</div>
@@ -82,6 +81,9 @@
 			</div>
 			<div class='flex-11' style='margin-left: -20px;'>
 				<h1>Resultados</h1>
+				<div id="result" class='flex-10' style='margin-left: -20px;'>
+
+				</div>
 			</div>
 		</div>
 	</div>
@@ -185,6 +187,9 @@
 		document.querySelector('#page_three').style.height  = ($(document).height()-64)+"px";
 		document.querySelector('#page_four').style.width = $(document).width()+"px";
 		document.querySelector('#page_four').style.min_height  = ($(document).height()-64)+"px";
+
+
+
 		$("#first_search").click(function(){
 			changePageTo(1)
 		});
@@ -195,8 +200,41 @@
 				if(document.querySelector('paper-menu').selected == 0){
 					$('#pages')[0].selected = 2;
 				}else{
-					alert('Download')
+					console.log("else");
 				}
+
+				$.ajax({
+           				 	url : "/laropa/loadQuery",
+					data:{"query": $("#textarea").val()},
+                					success : function(data){
+
+						var a = "<div> <table id=\"table_main\"> <tr>"
+                					for (var i = 0; i < data["cont"]; i++){
+							a += "<th>collumn" + i +"</th>"
+						}
+						a+= "</tr>"
+
+						console.log("comecando o content");
+						var array = []
+						array = data["content"];
+						console.log(array);
+						console.log(array.length);
+						for (var i = 0; i < data["content"].length; i++){
+							a+= "<tr>";
+							for (var j = 0; j < data["cont"]; j++){
+								a += "<td>"+ data["content"][i][j] +"</td>";
+							}
+							a += "</tr>"
+
+						}
+						a += "</table></div>"
+						$("#result").html(a);
+
+                					},
+                					error: function(xhr, ajaxOptions, thrownError){
+                    						console.log(xhr);
+                					}
+				});
 			}
 		});
 		$("#help").click(function(){
@@ -210,8 +248,25 @@
 		});
 		console.log('done')
 	})
+
+	function select(select){
+ 		var str;
+		if (select == "1" ){
+                               str = "SELECT DISTINCT ?id ?nome FROM <http://laropa.com> WHERE { ?person bibo:identifier ?id . ?person dc:title ?nameCV . ?person dc:creator ?personCreator. ?personCreator rdfs:label ?nome. ?nodeAuthor vivo:relates ?nodeAuthor2 . FILTER (?person != <http://ufpel.edu.br/lattes/2054259785006041>). }";
+		}
+		if(select =="2"){
+			str = "SELECT DISTINCT ?nameAuthor ?nameArticle ?coAuthorName  ?nameConference ?year ?refBy FROM <http://laropa.com> WHERE{ ?article a bibo:AcademicArticle . ?article dc:title ?nameArticle . ?article dcterms:isReferencedBy ?refBy . ?article vivo:relatedBy ?nodeAuthor. ?article dcterms:issued ?year . ?nodeAuthor vivo:relates ?nodeAuthor2. ?nodeAuthor vivo:rank ?rank . ?nodeAuthor2 rdfs:label ?coAuthorName . ?refBy dc:creator ?personCreator. ?personCreator rdfs:label ?nameAuthor. ?article bibo:presentedAt ?conference. ?conference dc:title ?nameConference . ?refBy bibo:identifier ?id. FILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>). FILTER (!regex(str(?nodeAuthor2), concat(\"#author-\",str(?id)))) } ORDER BY ?nameAuthor";
+		}
+		if(select == "3"){
+			str = "SELECT ?refBy ?name count(*) FROM <http://laropa.com> WHERE{ ?article a bibo:AcademicArticle . ?article dc:title ?nameArticle . ?article dcterms:isReferencedBy ?refBy . ?article dcterms:issued ?year. ?refBy dc:creator ?personCreator . ?personCreator rdfs:label ?name FILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>).} ORDER BY ?name ";
+		}
+		document.querySelector('#sparql_text').textarea.textContent = str;
+
+	}
 	function changePageTo(position){
 		$('#pages')[0].selected = position;
 		console.log('change to',position);
 	}
+
+
 </script>

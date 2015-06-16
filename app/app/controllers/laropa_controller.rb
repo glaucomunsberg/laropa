@@ -13,31 +13,6 @@ respond_to :html, :json, :js
 
 	def index
 
-		query="SELECT distinct ?refBy ?id ?nodeAuthor2 ?nameArticle ?name ?rank ?nome ?conference ?nameConference ?year
-			FROM <http://laburb.com>
-			WHERE{
-			   	?article a bibo:AcademicArticle .
-			   	?article dc:title ?nameArticle .
-			   	?article dcterms:isReferencedBy ?refBy .
-			   	?article vivo:relatedBy ?nodeAuthor.
-			   	?article dcterms:issued ?year .
-			   	?nodeAuthor vivo:relates ?nodeAuthor2.
-			   	?nodeAuthor vivo:rank ?rank .
-			   	?nodeAuthor2 rdfs:label ?name .
-			   	?refBy dc:creator ?personCreator.
-			   	?personCreator rdfs:label ?nome.
-			   	?article bibo:presentedAt ?conference.
-			   	?conference dc:title ?nameConference .
-                           		?refBy bibo:identifier ?id.
-                           	FILTER (?refBy != <http://ufpel.edu.br/lattes/6927803856702261>).
-                                 	FILTER (!regex(str(?nodeAuthor2), concat(\"#author-\",str(?id))))
-			} ORDER BY ?refBy"
-		connection = ConnectionSPARQL.new
-		data = connection.runQuery(query);
-		first, *rest = query.split(/FROM/)
-		cont = first.scan("?").count
-		@result = csvToArray(data, cont)
-		respond_with(@result)
 	end
 
 
@@ -67,4 +42,22 @@ respond_to :html, :json, :js
 		logger.info triples
 	return triples
 	end
+
+
+	def loadQuery
+		query = params["query"]
+		connection = ConnectionSPARQL.new
+		data = connection.runQuery(query);
+		@result = Hash.new
+		first, *rest = query.split(/FROM/)
+		cont = first.scan("?").count
+		@result["content"] = csvToArray(data, cont)
+		@result["cont"] = cont
+		respond_to do |format|
+		 format.json { render :json => @result}
+
+		end
+	end
 end
+
+
