@@ -69,15 +69,23 @@
 		</div>
 	</div>
 	<div style="background-color:white" id='page_three'>
-		<div class='horizontal layout center' style='padding-top:40px;'>
+		<div class='horizontal layout start' style='padding-top:40px;'>
 			<div class='flex-1'>
 				 <iron-image src='/assets/bookshelf.png' sizing="contain" width='64' height='64' style='margin-left:10px'></iron-image>
 			</div>
 			<div class='flex-11' style='margin-left: -20px;'>
 				<h1>Resultados</h1>
-				<div id="result" class='flex-10' style='margin-left: -20px;'>
-
-				</div>
+				<paper-material elevation="2" style='min-height: 213px;'>
+					<div id="result" class='flex-10' style='margin: 10px;  min-height: 169px;'>
+					</div>
+					<div class='justified horizontal layout' style='margin-top:15px'>
+						<div>
+							<paper-fab style='background-color: #00ad99;position: absolute;margin-top: 0px;' icon='arrow-back' onClick="document.querySelector('iron-pages').selected = 1">
+							</paper-fab>
+						</div>
+					</div>
+					
+				</paper-material>
 			</div>
 		</div>
 	</div>
