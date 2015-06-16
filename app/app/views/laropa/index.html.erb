@@ -25,7 +25,7 @@
 						</iron-autogrow-textarea>
 						<div class='justified  horizontal layout' style='margin-top:15px'>
 							<div>
-								<paper-fab style='background-color: #00ad99;position: absolute;margin-top: 0px;' icon='delete' onClick="document.querySelector('#sparql_text').textarea.value = ''">
+								<paper-fab style='background-color: #00ad99;position: absolute;margin-top: 0px;' icon='delete' onClick="clean()">
 								</paper-fab>
 							</div>
 							<div>
@@ -52,9 +52,9 @@
 							<paper-button onClick="select(3)" noink><iron-icon icon='class'></iron-icon> Co-Autores</paper-button>
 						</div>
 					</div>
-					
+
 				</paper-material>
-				
+
 			</div>
 			<div class='flex-1'></div>
 		</div>
@@ -77,6 +77,7 @@
 				<h1>Resultados</h1>
 				<paper-material elevation="2" style='min-height: 213px;'>
 					<div id="result" class='flex-10' style='margin: 10px;  min-height: 169px;'>
+						<img src="assets/loading.gif">
 					</div>
 					<div class='justified horizontal layout' style='margin-top:15px'>
 						<div>
@@ -84,7 +85,7 @@
 							</paper-fab>
 						</div>
 					</div>
-					
+
 				</paper-material>
 			</div>
 		</div>
@@ -106,7 +107,7 @@
 					<h2>1. Web Semanântica</h2>
 					<p> A conhecida “Web de documentos” é a “Web dos dados”, viabilizando pesquisas como num banco de dados. O objetivo final da Web de dados é possibilitar com que computadores façam coisas mais úteis e com que o desenvolvimento de sistemas possa oferecer suporte a interações na rede. O termo “Web Semântica” refere-se à visão do W3C da Web dos Dados Linkados. A Web Semântica dá às pessoas a capacidade de criarem repositórios de dados na Web, construírem vocabulários e escreverem regras para interoperarem com esses dados. A linkagem de dados é possível com tecnologias como RDF, SPARQL, OWL, SKOS.</p>
 					<h2>2. Lattes Semânticos</h2>
-					<p> Lattes semântico é a abordagem da transformação dos lattes XML em dados estruturados e com sentido semântico permitido pela conversão usando a <a href='https://wiki.duraspace.org/display/VIVO/VIVO-ISF+Ontology'>Ontologia VIVO</a>. Para essa transformação foi utilizado o conversor de XML para RDF <a href='https://github.com/arademaker/SLattes'>Slattes</a> proposto do A. Rademaker. Atualmente a base de dados que está sendo realizado essas consultas está no <a href='https://github.com/openlink/virtuoso-opensource'>Virtuoso-OpenSource</a></p> 
+					<p> Lattes semântico é a abordagem da transformação dos lattes XML em dados estruturados e com sentido semântico permitido pela conversão usando a <a href='https://wiki.duraspace.org/display/VIVO/VIVO-ISF+Ontology'>Ontologia VIVO</a>. Para essa transformação foi utilizado o conversor de XML para RDF <a href='https://github.com/arademaker/SLattes'>Slattes</a> proposto do A. Rademaker. Atualmente a base de dados que está sendo realizado essas consultas está no <a href='https://github.com/openlink/virtuoso-opensource'>Virtuoso-OpenSource</a></p>
 					<h2>3. SPARQL</h2>
 					<p> Significa SPARQL Protocol And RDF Query Language, o seu propósito é permitir que arquivos RDF sejam
 consultados através de uma linguagem SQL Like. É uma linguagem orientada a dados, ou seja, recupera dados armazenados em arquivos RDF. É construída sobre o formato de triplas sujeito, predicado e objeto. <a href='http://www.w3.org/TR/rdf-sparql-query/'>Mas sobre</a></p>
@@ -179,8 +180,17 @@ consultados através de uma linguagem SQL Like. É uma linguagem orientada a d
 	#first_search paper-material{
 		background-color:white
 	}
+	#table_main td{
+		padding-left:10px;
+	}
 </style>
 <script>
+
+	function clean(){
+		document.querySelector('#sparql_text').textarea.value = '';
+		$("#result").html("<img src='assets/loading.gif'>");
+	}
+
 	$(document).ready(function(){
 		document.querySelector('iron-image').style.width = $(document).width()+"px";
 		document.querySelector('iron-image').style.height  = ($(document).height()-124)+"px";
@@ -202,7 +212,12 @@ consultados através de uma linguagem SQL Like. É uma linguagem orientada a d
 			$.ajax({
            		url : "/laropa/loadQuery",
 				data:{"query": $("#textarea").val()},
+				beforeSend:function (){
+					document.querySelector('iron-pages').selected = 2;
+					clean();
+				},
 				success : function(data){
+
 					var a = "<div> <table id=\"table_main\"> <tr>"
 								for (var i = 0; i < data["cont"]; i++){
 						a += "<th>collumn" + i +"</th>"

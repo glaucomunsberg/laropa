@@ -45,12 +45,18 @@ respond_to :html, :json, :js
 
 
 	def loadQuery
+		temp = "count"
+
 		query = params["query"]
 		connection = ConnectionSPARQL.new
 		data = connection.runQuery(query);
 		@result = Hash.new
 		first, *rest = query.split(/FROM/)
 		cont = first.scan("?").count
+		if first.include? temp
+			cont+=1;
+		end
+
 		@result["content"] = csvToArray(data, cont)
 		@result["cont"] = cont
 		respond_to do |format|
