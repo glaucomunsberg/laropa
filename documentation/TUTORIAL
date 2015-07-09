@@ -1,0 +1,95 @@
+==================================================
+TUTORIAL DE INSTAÇÃO
+
+PROJETO - LAROPA
+==================================================
+
+PASSO 1
+Instale o sistema de banco de triplas VIRTUOSO
+
+Faça o download pelo SourceForge: 
+
+http://sourceforge.net/projects/virtuoso/
+
+Verifique se há os pacotes, caso não haja instale:
+autoconf http://www.gnu.org/software/autoconf/
+automake http://www.gnu.org/software/automake/
+libtool	 http://www.gnu.org/software/libtool/
+flex	 http://www.gnu.org/software/non-gnu/flex/
+bison	 http://www.gnu.org/software/bison/
+gperf	 http://www.gnu.org/software/gperf/
+gawk	 http://www.gnu.org/software/gawk/
+m4	 http://www.gnu.org/software/m4/
+make	 http://www.gnu.org/software/make/
+OpenSSL	 http://www.openssl.org/
+
+descompacte o arquivo do virtuoso
+
+Rode os seguintes comandos:
+
+$ ./configure
+$ make
+$ make install
+
+Entre no diretório: cd var/lib/virtuoso/db
+Rode o comando: 
+
+$ virtuoso-t -f &
+
+http://localhost:8890/
+
+==================================================
+
+Comandos para importar os RDF's
+
+==================================================
+PASSO 2
+
+Entra como root
+$ sudo su
+
+cria a pasta
+$ mkdir /tmp/rdf-computacao-ufpel
+
+Joga os rdf's pra o tmp para ter acesso
+$ cp /home/agpeil/projetos/SLattes-master/rdf-computacao-ufpel/* /tmp/rdf-computacao-ufpel/
+
+$ chmod 777 /tmp/rdf-computacao-ufpel/*
+
+Acessa o isql
+$ /usr/bin/isql-vt 1111 dba dba
+
+$ ld_dir_all('/tmp/rdf-computacao-ufpel', '*.rdf' ,'http://laropa.com.br');
+$ rdf_loader_run ();
+
+
+excluir um graph por linha de comando
+$ log_enable(3,1);
+$ SPARQL CLEAR GRAPH <http://wordnet30.com>;
+
+
+
+
+==================================================
+
+tutorial para instalar o LAROPA
+
+==================================================
+
+PASSO 3
+
+$ git clone https://github.com/glaucomunsberg/laropa.git
+
+para rodar
+
+entre na pasta do projeto
+
+$ cd laropa/app/
+
+inicie o servidor
+
+$ rails s
+
+acesse no seu navegador: 
+
+$ localhos:3000

@@ -60,10 +60,10 @@ respond_to :html, :json, :js
 		@result["content"] = csvToArray(data, cont)
 		@result["cont"] = cont
 		respond_to do |format|
-		 format.json { render :json => @result}
-
+		 	format.json { render :json => @result}
 		end
 	end
+
 end
 
 

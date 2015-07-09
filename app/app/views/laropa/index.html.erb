@@ -20,7 +20,7 @@
 				<paper-material elevation="1" style='min-height: 213px;'>
 					<div class='vertical layout'>
 						<h4>Crie sua Consulta</h4>
-						<iron-autogrow-textarea id="sparql_text" rows='6' style='width:100%'  >
+						<iron-autogrow-textarea id="sparql_text" rows='20' style='width:100%'  >
 							<textarea>Some</textarea>
 						</iron-autogrow-textarea>
 						<div class='justified  horizontal layout' style='margin-top:15px'>
@@ -219,17 +219,18 @@ consultados através de uma linguagem SQL Like. É uma linguagem orientada a d
 				success : function(data){
 
 					var a = "<div> <table id=\"table_main\"> <tr>"
-								for (var i = 0; i < data["cont"]; i++){
-						a += "<th>collumn" + i +"</th>"
-					}
+							for (var i = 0; i < data["cont"]; i++){
+								a += "<th>collumn" + i +"</th>"
+							}
 					a+= "</tr>"
+
 					console.log("comecando o content");
 					var array = []
 					array = data["content"];
 					console.log(array);
 					console.log(array.length);
 					for (var i = 0; i < data["content"].length; i++){
-						a+= "<tr>";
+						a+= "<tr id='"+data["content"][i][0]+"' onClick='navegar("+data["content"][i][0]+")'>";
 						for (var j = 0; j < data["cont"]; j++){
 							a += "<td>"+ data["content"][i][j] +"</td>";
 						}
@@ -253,7 +254,27 @@ consultados através de uma linguagem SQL Like. É uma linguagem orientada a d
 			window.open("http://github.com/glaucomunsberg/laropa", "_blank");
 		});
 		console.log('done')
-	})
+	});
+
+	function navegar (id) {
+		var sparql = "SELECT ?nameArticle ?year FROM <http://laropa.com> WHERE{ ?article a bibo:AcademicArticle . ?article dc:title ?nameArticle . ?article dcterms:isReferencedBy ?refBy. ?article dcterms:issued ?year . FILTER regex(str(?article), \""+id+"\"). } ORDER BY DESC(?year) limit 10"
+
+		console.log(sparql);
+		$.ajax({
+           		url : "/laropa/loadQuery",
+				data:{"query": sparql},
+				beforeSend:function (){
+					document.querySelector('iron-pages').selected = 2;
+					clean();
+				},
+				success : function(data){
+					console.log(data);
+				},
+				error: function(xhr, ajaxOptions, thrownError){
+					console.log(xhr);
+				}
+			});
+	}
 
 	function select(select){
  		var str;
@@ -261,7 +282,7 @@ consultados através de uma linguagem SQL Like. É uma linguagem orientada a d
                                str = "SELECT DISTINCT ?id ?nome \nFROM <http://laropa.com> \nWHERE { \n?person bibo:identifier ?id . ?person dc:title ?nameCV .\n ?person dc:creator ?personCreator.\n ?personCreator rdfs:label ?nome.\n ?nodeAuthor vivo:relates ?nodeAuthor2 .\n FILTER (?person != <http://ufpel.edu.br/lattes/2054259785006041>). }";
 		}
 		if(select =="2"){
-			str = "SELECT DISTINCT ?nameAuthor ?nameArticle ?coAuthorName  ?nameConference ?year ?refBy \nFROM <http://laropa.com> \nWHERE{ ?article a bibo:AcademicArticle .\n ?article dc:title ?nameArticle .\n ?article dcterms:isReferencedBy ?refBy .\n ?article vivo:relatedBy ?nodeAuthor. ?article dcterms:issued ?year . ?nodeAuthor vivo:relates ?nodeAuthor2. ?nodeAuthor vivo:rank ?rank .\n ?nodeAuthor2 rdfs:label ?coAuthorName .\n ?refBy dc:creator ?personCreator.\n ?personCreator rdfs:label ?nameAuthor.\n ?article bibo:presentedAt ?conference.\n ?conference dc:title ?nameConference .\n ?refBy bibo:identifier ?id.\n FILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>).\n FILTER (!regex(str(?nodeAuthor2), concat(\"#author-\",str(?id)))) } \nORDER BY ?nameAuthor";
+			str = "SELECT DISTINCT ?nameAuthor ?nameArticle ?coAuthorName  ?nameConference ?year ?refBy \nFROM <http://laropa.com> \nWHERE{ ?article a bibo:AcademicArticle .\n ?article dc:title ?nameArticle .\n ?article dcterms:isReferencedBy ?refBy .\n ?article vivo:relatedBy ?nodeAuthor. \n ?article dcterms:issued ?year .\n ?nodeAuthor vivo:relates ?nodeAuthor2. \n ?nodeAuthor vivo:rank ?rank .\n ?nodeAuthor2 rdfs:label ?coAuthorName .\n ?refBy dc:creator ?personCreator.\n ?personCreator rdfs:label ?nameAuthor.\n ?article bibo:presentedAt ?conference.\n ?conference dc:title ?nameConference .\n ?refBy bibo:identifier ?id.\n FILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>).\n FILTER (!regex(str(?nodeAuthor2), concat(\"#author-\",str(?id)))) } \nORDER BY ?nameAuthor";
 		}
 		if(select == "3"){
 			str = "SELECT ?refBy ?name count(*) \nFROM <http://laropa.com> \nWHERE{ ?article a bibo:AcademicArticle .\n ?article dc:title ?nameArticle .\n ?article dcterms:isReferencedBy ?refBy .\n ?article dcterms:issued ?year.\n ?refBy dc:creator ?personCreator .\n ?personCreator rdfs:label ?name \nFILTER (?refBy != <http://ufpel.edu.br/lattes/2054259785006041>).} \nORDER BY ?name ";
